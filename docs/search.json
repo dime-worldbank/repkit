@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "repkit",
+    "section": "",
+    "text": "This Stata package is published by DIME Analytics and with tools related to computational reproducibility.\n\nContact: dimeanalytics@worldbank.org"
+  },
+  {
+    "objectID": "src/mdhlp/repkit.html",
+    "href": "src/mdhlp/repkit.html",
+    "title": "repkit",
+    "section": "",
+    "text": "Syntax\nrepkit\n\n\nDescription\nThis command only returns the version number and version data to the user. This command has little application for the user. For packages installed on SSC it is important that a there is a command in the package that has the same name as the package. That is the main purpose of this command.\n\n\nOptions\nThis command has no options.\n\n\nFeedback, bug reports and contributions\nPlease provide any feed back by opening and issue at https://github.com/dime-worldbank/repkit.\nPRs with suggestions for improvements are also greatly appreciated.\n\n\nAuthors\nDIME Analytics, The World Bank dimenalytics@worldbank.org"
+  },
+  {
+    "objectID": "src/mdhlp/repado.html",
+    "href": "src/mdhlp/repado.html",
+    "title": "repkit",
+    "section": "",
+    "text": "repado - a command to handle ado-file dependencies"
+  },
+  {
+    "objectID": "src/mdhlp/repado.html#example-1",
+    "href": "src/mdhlp/repado.html#example-1",
+    "title": "repkit",
+    "section": "Example 1",
+    "text": "Example 1\nIn this example the ado-folder is a folder called ado in the folder that the global myproj is pointing to.\nrepado , adopath(\"${myproj}/ado\") mode(\"strict\")"
+  },
+  {
+    "objectID": "reference/repkit.html",
+    "href": "reference/repkit.html",
+    "title": "repkit.md",
+    "section": "",
+    "text": "Syntax\nrepkit\n\n\nDescription\nThis command only returns the version number and version data to the user. This command has little application for the user. For packages installed on SSC it is important that a there is a command in the package that has the same name as the package. That is the main purpose of this command.\n\n\nOptions\nThis command has no options.\n\n\nFeedback, bug reports and contributions\nPlease provide any feed back by opening and issue at https://github.com/dime-worldbank/repkit.\nPRs with suggestions for improvements are also greatly appreciated.\n\n\nAuthors\nDIME Analytics, The World Bank dimenalytics@worldbank.org"
+  },
+  {
+    "objectID": "reference/repado.html",
+    "href": "reference/repado.html",
+    "title": "repado.md",
+    "section": "",
+    "text": "repado - a command to handle ado-file dependencies"
+  },
+  {
+    "objectID": "reference/repado.html#example-1",
+    "href": "reference/repado.html#example-1",
+    "title": "repado.md",
+    "section": "Example 1",
+    "text": "Example 1\nIn this example the ado-folder is a folder called ado in the folder that the global myproj is pointing to.\nrepado , adopath(\"${myproj}/ado\") mode(\"strict\")"
+  },
+  {
+    "objectID": "reference/index.html",
+    "href": "reference/index.html",
+    "title": "Function reference",
+    "section": "",
+    "text": "Functions\nDescription\n\n\n\n\nrepado\na command to handle ado-file dependencies\n\n\nrepkit\nPackage command with utilities for the rest of the package"
+  }
+]
