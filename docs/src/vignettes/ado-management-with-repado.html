@@ -211,7 +211,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="using-repado-for-ado-file-management" class="level1">
 <h1>Using <code>repado</code> for Ado-File Management</h1>
 <p><em>This is a comprehensive guide on how to use <code>repado</code>. For a shorter and more technical syntax documentation, refer to the <a href="https://dime-worldbank.github.io/repkit/reference/repado.html">helpfile</a>.</em></p>
-<hr>
 <section id="background" class="level2">
 <h2 class="anchored" data-anchor-id="background">Background</h2>
 <p>To create a fully reproducible reproducibility package for a research project, you need the following four elements:</p>
@@ -271,11 +270,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ├─ data/
 ├─ outputs/</code></pre>
 <p>In this case, the basic use of <code>repado</code> would be as follows:</p>
-<pre><code>* Set user root folder
-global root "C:\Users\user123\github\myproject"
-
-* Point repado to the ado-folder
-repado, adopath("${root}/code/ado") mode(strict)</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>* Set user root folder</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">global</span> root <span class="st">"C:\Users\user123\github\myproject"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>* Point repado to the ado-folder</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>repado, <span class="kw">adopath</span>(<span class="st">"${root}/code/ado"</span>) <span class="kw">mode</span>(<span class="ot">strict</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Upon re-running the <code>adopath</code> command, the output will now be:</p>
 <pre><code>[1]  (BASE)      "C:\Program Files\Stata17\ado\base/"
 [2]  (PLUS)      "C:\Users\user123\github\myproject/code/ado"</code></pre>
@@ -326,38 +325,38 @@ repado, adopath("${root}/code/ado") mode(strict)</code></pre>
 <p>As an alternative, the code from <code>repado</code> can be copied into the project’s main file. <code>repkit</code> is published using the MIT license where this is perfectly allowed. The ado-folder must still be created in the same way as described above. Afterward, you can add that folder using one of the two examples below. Both examples assume the same folder structure as previously outlined.</p>
 <p>Before using any of these examples, ensure they are utilizing the most recent version of the code used in the <code>repado</code> command <a href="https://github.com/dime-worldbank/repkit/blob/main/src/ado/repado.ado">here</a>.</p>
 <p><strong>Example 1:</strong> In this example, the same results are achieved as when using <code>repado</code> in strict mode. This version maintains only the project ado-folder and the <code>BASE</code> folder in the ado-paths. After running this code, you can still install commands in the project ado-folder using <code>ssc install</code> and use other commands that use the <code>PLUS</code> folder.</p>
-<pre><code>* Set user root folder
-global root "C:\Users\user123\github\myproject"
-
-* Set PLUS to adopath and list it first, then list BASE first.
-* This means that BASE is first and PLUS is second.
-sysdir set  PLUS "${root}/code/ado"'
-adopath ++  PLUS
-adopath ++  BASE
-
-* Keep removing adopaths with rank 3 until only BASE and PLUS,
-* that has rank 1 and 2, are left in the adopaths
-local morepaths 1
-while (`morepaths' == 1) {
-  capture adopath - 3
-  if _rc local morepaths 0
-}</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>* Set user root folder</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">global</span> root <span class="st">"C:\Users\user123\github\myproject"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>* Set <span class="ot">PLUS</span> to <span class="kw">adopath</span> and <span class="ot">list</span> it first, then <span class="ot">list</span> <span class="kw">BASE</span> first.</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>* This <span class="kw">means</span> that <span class="kw">BASE</span> is first and <span class="ot">PLUS</span> is second.</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ot">sysdir</span> <span class="kw">set</span>  <span class="ot">PLUS</span> <span class="st">"${root}/code/ado"</span>'</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">adopath</span> ++  <span class="ot">PLUS</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="kw">adopath</span> ++  <span class="kw">BASE</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>* Keep removing adopaths with <span class="fu">rank</span> 3 <span class="kw">until</span> only <span class="kw">BASE</span> and <span class="ot">PLUS</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>* that has <span class="fu">rank</span> 1 and 2, are left <span class="kw">in</span> the adopaths</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> morepaths 1</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="kw">while</span> (<span class="ot">`morepaths'</span> == 1) {</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">capture</span> <span class="kw">adopath</span> - 3</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">if</span> <span class="dt">_rc</span> <span class="kw">local</span> morepaths 0</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Example 2:</strong> This example is identical to the first one, with the exception that <code>PLUS</code> is not used. This eliminates the risk of any user accidentally using <code>adoupdate</code> to update all commands in the project ado-folder. This aspect is especially useful when not using Git, as mistakes like this cannot be easily reverted. If Git is employed, and all content in the ado-folder is tracked in the repository, this difference becomes less significant.</p>
-<pre><code>* Set user root folder
-global root "C:\Users\user123\github\myproject"
-
-* Set PLUS to adopath and list it first, then list BASE first.
-* This means that BASE is first and PLUS is second.
-adopath ++  "${root}/code/ado"
-adopath ++  BASE
-
-* Keep removing adopaths with rank 3 until only BASE and the project ado-folder,
-* that has rank 1 and 2, are left in the adopaths
-local morepaths 1
-while (`morepaths' == 1) {
-  capture adopath - 3
-  if _rc local morepaths 0
-}</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>* Set user root folder</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">global</span> root <span class="st">"C:\Users\user123\github\myproject"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>* Set <span class="ot">PLUS</span> to <span class="kw">adopath</span> and <span class="ot">list</span> it first, then <span class="ot">list</span> <span class="kw">BASE</span> first.</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>* This <span class="kw">means</span> that <span class="kw">BASE</span> is first and <span class="ot">PLUS</span> is second.</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">adopath</span> ++  <span class="st">"${root}/code/ado"</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">adopath</span> ++  <span class="kw">BASE</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>* Keep removing adopaths with <span class="fu">rank</span> 3 <span class="kw">until</span> only <span class="kw">BASE</span> and the project ado-folder,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>* that has <span class="fu">rank</span> 1 and 2, are left <span class="kw">in</span> the adopaths</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> morepaths 1</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="kw">while</span> (<span class="ot">`morepaths'</span> == 1) {</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">capture</span> <span class="kw">adopath</span> - 3</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">if</span> <span class="dt">_rc</span> <span class="kw">local</span> morepaths 0</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>It is equally possible to create a future-proof reproducibility package using <code>repado</code> or either of the two examples provided here. We have offered <code>repado</code> in the form of a command to make this process easier and to abstract away technical code. In the end, it is up to each team to decide which method to employ.</p>
 
 
