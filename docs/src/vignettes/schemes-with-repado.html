@@ -128,12 +128,11 @@ ul.task-list{list-style: none;}
 <h1>Using custom schemes when using <code>repado</code></h1>
 <p>The recommended installation location for custom schemes is the <code>PERSONAL</code> folder. If you are using <code>repado</code> in <code>nostrict</code> mode, then this is not an issue as the <code>PERSONAL</code> folder is still accessible. However, if you are using <code>repado</code> in <code>strict</code> mode, then the <code>PERSONAL</code> folder is no longer accessible. In this case we recommend installing the custom schemes in the folder used in the <code>adopath()</code> option.</p>
 <p>A simple implementation is as follows:</p>
-<pre><code>global myproject "/path/to/project/"
+<pre><code>  global myproject "/path/to/project/"
+  repado , adopath("${myproject}/ado") mode(strict)
 
-repado , adopath("${myproject}/ado/") mode(strict)
-
-copy "https://github.com/graykimbrough/uncluttered-stata-graphs/raw/master/schemes/scheme-uncluttered.scheme" ///
-  "${repkit}/src/tests/plus-ado/scheme-uncluttered.scheme" , replace
+  local url "https://github.com/graykimbrough/uncluttered-stata-graphs/raw/master/schemes/scheme-uncluttered.scheme" 
+  copy "`url" "${myproject}/ado/scheme-uncluttered.scheme" , replace
 
   set scheme uncluttered , perm
   graph set eps fontface "Helvetica"
